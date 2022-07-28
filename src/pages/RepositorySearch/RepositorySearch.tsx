@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useSearchUsersQuery } from "../../store/github/github.api";
+import {
+    useLazyGetUserReposQuery,
+    useSearchUsersQuery,
+} from "../../store/github/github.api";
 import { useDebounce } from "../../hooks/debounce";
 import "./RepositorySearch.scss";
 
 export function RepositorySearch() {
     const [search, setSearch] = useState("");
     const debounced = useDebounce(search);
+    const [dropdown, setDropdown] = useState(false);
     const { isLoading, isError, data } = useSearchUsersQuery(debounced, {
         skip: debounced.length < 3,
     });
 
+    const [fetchRepos, { isLoading: areReposLoading, data: repos }] =
+        useLazyGetUserReposQuery();
+
     useEffect(() => {
-        console.log(debounced);
-    }, [debounced]);
+        setDropdown(debounced.length > 3 && data?.length! > 0);
+    }, [debounced, data]);
+
+    const clickHandler = (username: string) => {
+        fetchRepos(username);
+    };
+    // console.log(repos);
 
     return (
         <div className="repository-search">
@@ -30,19 +42,40 @@ export function RepositorySearch() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
-                    <ul className="repository-search__list">
-                        {isLoading && (
-                            <p className="repository-search__loading"></p>
+
+                    {dropdown && (
+                        <ul className="repository-search__list">
+                            {isLoading && (
+                                <p className="repository-search__loading"></p>
+                            )}
+                            {data?.map((user) => (
+                                <li
+                                    className="repository-search__item"
+                                    key={user.id}
+                                    onClick={() => clickHandler(user.login)}
+                                >
+                                    {user.login}
+                                    <img src={user.avatar_url} alt="" />
+                                    {user.repos_url.length}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    <div className="repository-search__user-rep">
+                        {areReposLoading && (
+                            <p className="text-center">Repos are loading...</p>
                         )}
-                        {data?.map((user) => (
-                            <li
-                                className="repository-search__item"
-                                key={user.id}
-                            >
-                                {user.login}
-                            </li>
+
+                        {repos?.map((repo) => (
+                            <div key={repo.id}>
+                                <a href={repo.html_url} target="_blank">
+                                    <img src={repo.owner.avatar_url} alt="" />
+
+                                    <p> {repo.forks}</p>
+                                </a>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 </div>
             </div>
         </div>

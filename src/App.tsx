@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { RepositorySearch } from "./pages/RepositorySearch/RepositorySearch";
 import { UserRepository } from "./pages/UserRepository";
 import "./App.scss";
-import { Navigation } from "./components/Navigation";
+import { Navigation } from "./components/navigation/Navigation";
 
 function App() {
     return (
