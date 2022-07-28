@@ -1,0 +1,22 @@
+.navigation-app {
+    background-color: #2e8bcc;
+
+    // .navigation-app__link
+    &__link {
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3,
+        a {
+            color: rgb(224, 224, 224);
+        }
+        a {
+            text-decoration: none;
+            font-size: 18px;
+        }
+        a + a {
+            padding-left: 25px;
+        }
+    }
+}

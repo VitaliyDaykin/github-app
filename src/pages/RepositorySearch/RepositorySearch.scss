@@ -1,0 +1,56 @@
+.repository-search {
+    padding-top: 30px;
+    text-align: center;
+    &__title {
+        margin-bottom: 20px;
+    }
+    &__showcase {
+        display: flex;
+        justify-content: center;
+        // height: 100vh;
+        text-align: center;
+    }
+    &__error {
+        color: red;
+
+        &__loading {
+            color: greenyellow;
+        }
+    }
+    &__form {
+        position: relative;
+        min-width: 800px;
+        input {
+            padding: 10px 30px;
+            width: 100%;
+            border: 1px solid #2e8bcc;
+            border-radius: 7px;
+            margin-bottom: 8px;
+        }
+    }
+    &__list {
+        position: absolute;
+        top: 47px;
+        left: 0;
+        right: 0;
+        max-height: 600px;
+        box-shadow: 0px 2px 10px #2e8bcc;
+        background-color: #fff;
+        border-radius: 7px;
+        list-style: none;
+        padding: 0 20px;
+        overflow-y: scroll;
+    }
+
+    &__item {
+        text-align: left;
+        padding: 10px 30px;
+        cursor: pointer;
+        border-radius: 7px;
+        transition: all 0.3s ease 0s;
+        &:hover {
+            background-color: gray;
+            color: white;
+        }
+    }
+}
