@@ -19,8 +19,8 @@
     }
     &__form {
         position: relative;
-        width: 800px;
-        max-width: 800px;
+        width: 650px;
+        max-width: 650px;
         input {
             padding: 10px 30px;
             width: 100%;
@@ -34,12 +34,12 @@
         top: 47px;
         left: 0;
         right: 0;
-        height: 400px;
+        height: 500px;
         box-shadow: 0px 2px 10px #2e8bcc;
-        background-color: #fff;
+        background-color: rgb(214, 211, 211);
         border-radius: 7px;
         list-style: none;
-        padding: 0 20px;
+        padding: 0 10px;
         overflow-y: scroll;
         img {
             width: 40%;
@@ -48,7 +48,7 @@
 
     &__item {
         text-align: left;
-        padding: 10px 30px;
+        padding: 5px 20px;
         cursor: pointer;
         border-radius: 7px;
         transition: all 0.3s ease 0s;

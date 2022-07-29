@@ -6,13 +6,19 @@ import {
 import { useDebounce } from "../../hooks/debounce";
 import "./RepositorySearch.scss";
 
+import { useNavigate } from "react-router-dom";
+import { RepoCard } from "../../components/repoCard/RepoCard";
+
 export function RepositorySearch() {
     const [search, setSearch] = useState("");
     const debounced = useDebounce(search);
     const [dropdown, setDropdown] = useState(false);
     const { isLoading, isError, data } = useSearchUsersQuery(debounced, {
         skip: debounced.length < 3,
+        refetchOnFocus: true,
     });
+
+    const naviage = useNavigate();
 
     const [fetchRepos, { isLoading: areReposLoading, data: repos }] =
         useLazyGetUserReposQuery();
@@ -24,7 +30,6 @@ export function RepositorySearch() {
     const clickHandler = (username: string) => {
         fetchRepos(username);
     };
-    // console.log(repos);
 
     return (
         <div className="repository-search">
@@ -54,28 +59,11 @@ export function RepositorySearch() {
                                     key={user.id}
                                     onClick={() => clickHandler(user.login)}
                                 >
-                                    {user.login}
-                                    <img src={user.avatar_url} alt="" />
-                                    {user.repos_url.length}
+                                    <RepoCard repo={user} />
                                 </li>
                             ))}
                         </ul>
                     )}
-                    <div className="repository-search__user-rep">
-                        {areReposLoading && (
-                            <p className="text-center">Repos are loading...</p>
-                        )}
-
-                        {repos?.map((repo) => (
-                            <div key={repo.id}>
-                                <a href={repo.html_url} target="_blank">
-                                    <img src={repo.owner.avatar_url} alt="" />
-
-                                    <p> {repo.forks}</p>
-                                </a>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </div>
         </div>
