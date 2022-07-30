@@ -8,6 +8,7 @@ import "./RepositorySearch.scss";
 
 import { useNavigate } from "react-router-dom";
 import { RepoCard } from "../../components/repoCard/RepoCard";
+import { UserCard } from "../../components/userCard/UserCard";
 
 export function RepositorySearch() {
     const [search, setSearch] = useState("");
@@ -29,6 +30,7 @@ export function RepositorySearch() {
 
     const clickHandler = (username: string) => {
         fetchRepos(username);
+        setDropdown(false);
     };
 
     return (
@@ -64,6 +66,22 @@ export function RepositorySearch() {
                             ))}
                         </ul>
                     )}
+                    <div className="repository-search__user-rep">
+                        {areReposLoading && (
+                            <p className="text-center">Repos are loading...</p>
+                        )}
+
+                        {repos?.map((repo) => (
+                            <div key={repo.id}>
+                                {/* <a href={repo.html_url} target="_blank">
+                                    <img src={repo.owner.avatar_url} alt="" />
+
+                                    <p> {repo.forks}</p>
+                                </a> */}
+                                <UserCard user={repo} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

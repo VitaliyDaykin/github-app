@@ -1,0 +1,27 @@
+.repo-card {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
+
+    // .repo-card__img
+    &__img {
+        max-width: 168px;
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+    // .repo-card__title
+    &__title {
+        color: #2e8bcc;
+    }
+    // .repo-card__text
+    &__text {
+        font-size: 18px;
+        color: yellow;
+    }
+}

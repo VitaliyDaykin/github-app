@@ -20,6 +20,7 @@ export const githubSlice = createSlice({
                 LS_USREP_KEY,
                 JSON.stringify(state.userRepository)
             );
+            console.log(action);
         },
         removeRepository(state, action: PayloadAction<string>) {
             state.userRepository = state.userRepository.filter(
