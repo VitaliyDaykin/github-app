@@ -1,23 +1,23 @@
 import React from "react";
-
-import { IRepo } from "../../models/models";
 import "./UserCard.scss";
 
-export function UserCard({ user }: { user: IRepo }) {
+export function UserCard({ currentUserData }: { currentUserData: any }) {
     return (
-        <div className="repo-card">
-            <div className="repo-card__img">
-                <img src={user.owner.avatar_url} alt="" />
+        <a href={currentUserData.html_url} target="_blank">
+            <div className="user-biographi">
+                <div className="user-biographi__avatar">
+                    <img src={currentUserData.avatar_url} />
+                </div>
+                <ul className="user-biographi__list">
+                    <li>Name: {currentUserData.name}</li>
+                    <li>UserName: {currentUserData.login}</li>
+                    <li>Email: {currentUserData.email}</li>
+                    <li>Location: {currentUserData.location}</li>
+                    <li>Join Date: {currentUserData.created_at}</li>
+                    <li>Followers: {currentUserData.followers}</li>
+                    <li>Following: {currentUserData.following}</li>
+                </ul>
             </div>
-            <p className="repo-card__title">
-                Name of the repository: {user.name}
-            </p>
-            <div>
-                <p className="repo-card__text">Fork: {user.forks}</p>
-                <p className="repo-card__text">
-                    Stars: {user.stargazers_count}
-                </p>
-            </div>
-        </div>
+        </a>
     );
 }

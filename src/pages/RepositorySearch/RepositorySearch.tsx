@@ -1,53 +1,43 @@
-import React, { useEffect, useState } from "react";
-import {
-    useLazyGetUserReposQuery,
-    useSearchUsersQuery,
-} from "../../store/github/github.api";
-import { useDebounce } from "../../hooks/debounce";
+import { useEffect, useState } from "react";
+import { fetchSearchusers } from "../../store/github/github.slice";
 import "./RepositorySearch.scss";
 
 import { useNavigate } from "react-router-dom";
 import { RepoCard } from "../../components/repoCard/RepoCard";
-import { UserCard } from "../../components/userCard/UserCard";
+import { useDispatch, useSelector } from "react-redux";
 
 export function RepositorySearch() {
+    const dispatch = useDispatch<any>();
+
     const [search, setSearch] = useState("");
-    const debounced = useDebounce(search);
+    const { usersList, isLoading } = useSelector((state: any) => state.github);
     const [dropdown, setDropdown] = useState(false);
-    const { isLoading, isError, data } = useSearchUsersQuery(debounced, {
-        skip: debounced.length < 3,
-        refetchOnFocus: true,
-    });
 
     const naviage = useNavigate();
 
-    const [fetchRepos, { isLoading: areReposLoading, data: repos }] =
-        useLazyGetUserReposQuery();
-
     useEffect(() => {
-        setDropdown(debounced.length > 3 && data?.length! > 0);
-    }, [debounced, data]);
+        setDropdown(usersList?.length > 0);
+    }, [usersList]);
 
     const clickHandler = (username: string) => {
-        fetchRepos(username);
-        setDropdown(false);
+        naviage(`/${username}`);
     };
 
     return (
         <div className="repository-search">
             <h2 className="repository-search__title">RepositorySearch</h2>
             <div className="repository-search__showcase">
-                {isError && (
-                    <p className="repository-search__error">
-                        Something went wrong...
-                    </p>
-                )}
                 <div className="repository-search__form">
                     <input
                         type="text"
-                        placeholder="Search for Github username..."
+                        placeholder="Search for Users"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                dispatch(fetchSearchusers(search));
+                            }
+                        }}
                     />
 
                     {dropdown && (
@@ -55,7 +45,7 @@ export function RepositorySearch() {
                             {isLoading && (
                                 <p className="repository-search__loading"></p>
                             )}
-                            {data?.map((user) => (
+                            {usersList?.map((user: any) => (
                                 <li
                                     className="repository-search__item"
                                     key={user.id}
@@ -66,22 +56,6 @@ export function RepositorySearch() {
                             ))}
                         </ul>
                     )}
-                    <div className="repository-search__user-rep">
-                        {areReposLoading && (
-                            <p className="text-center">Repos are loading...</p>
-                        )}
-
-                        {repos?.map((repo) => (
-                            <div key={repo.id}>
-                                {/* <a href={repo.html_url} target="_blank">
-                                    <img src={repo.owner.avatar_url} alt="" />
-
-                                    <p> {repo.forks}</p>
-                                </a> */}
-                                <UserCard user={repo} />
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </div>
         </div>

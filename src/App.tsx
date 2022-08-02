@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
 import { RepositorySearch } from "./pages/RepositorySearch/RepositorySearch";
-import { UserRepository } from "./pages//UserRepository";
+import { UserRepository } from "./pages/UserRepositorry/UserRepository";
 import "./App.scss";
 import { Navigation } from "./components/navigation/Navigation";
 

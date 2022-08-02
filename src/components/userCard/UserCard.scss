@@ -1,27 +1,35 @@
-.repo-card {
-    padding: 10px 0;
+.user-biographi {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 30px 0;
     @media (max-width: 500px) {
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    // .repo-card__img
-    &__img {
-        max-width: 168px;
+    &__avatar {
+        max-width: 300px;
+
         img {
             display: block;
             width: 100%;
         }
     }
-    // .repo-card__title
-    &__title {
-        color: #2e8bcc;
-    }
-    // .repo-card__text
-    &__text {
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        list-style: none;
         font-size: 18px;
-        color: yellow;
+        padding-left: 50px;
+        @media (max-width: 500px) {
+            padding: 0;
+            align-items: center;
+        }
+        li:not(:last-child) {
+            padding-bottom: 10px;
+        }
     }
 }

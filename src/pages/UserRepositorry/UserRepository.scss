@@ -1,0 +1,29 @@
+.repository-user {
+    padding-top: 30px;
+    text-align: center;
+    &__title {
+        margin-bottom: 20px;
+    }
+
+    &__user-card {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    &__rupos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 15px;
+        &:hover {
+            background-color: gray;
+        }
+        h5 {
+            color: #2e8bcc;
+        }
+        p {
+            font-size: 18px;
+            color: yellow;
+        }
+    }
+}

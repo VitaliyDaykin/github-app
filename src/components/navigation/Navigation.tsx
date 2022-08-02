@@ -9,7 +9,6 @@ export function Navigation() {
                 <h3>Github Search</h3>
                 <div>
                     <Link to="/">RepositorySearch</Link>
-                    {/* <Link to="/userrepository">UserRepository</Link> */}
                 </div>
             </div>
         </nav>
