@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/VitaliyDaykin.github.io/github-app/static/css/main.fe5c7a21.css",
-    "main.js": "/VitaliyDaykin.github.io/github-app/static/js/main.323cfd31.js",
-    "index.html": "/VitaliyDaykin.github.io/github-app/index.html",
-    "main.fe5c7a21.css.map": "/VitaliyDaykin.github.io/github-app/static/css/main.fe5c7a21.css.map",
-    "main.323cfd31.js.map": "/VitaliyDaykin.github.io/github-app/static/js/main.323cfd31.js.map"
+    "main.css": "/github-app/static/css/main.fe5c7a21.css",
+    "main.js": "/github-app/static/js/main.323cfd31.js",
+    "index.html": "/github-app/index.html",
+    "main.fe5c7a21.css.map": "/github-app/static/css/main.fe5c7a21.css.map",
+    "main.323cfd31.js.map": "/github-app/static/js/main.323cfd31.js.map"
   },
   "entrypoints": [
     "static/css/main.fe5c7a21.css",
