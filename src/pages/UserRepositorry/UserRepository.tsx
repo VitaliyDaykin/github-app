@@ -15,8 +15,6 @@ export function UserRepository() {
     );
     const currentUser = usersList.find((item: any) => item.login === user);
 
-    console.log(currentUserData.user_repos);
-
     useEffect(() => {
         if (currentUser) {
             dispatch(getUserAdditionalInfo(currentUser));

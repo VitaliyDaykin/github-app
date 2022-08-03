@@ -1,6 +1,10 @@
 .repository-user {
     padding-top: 30px;
     text-align: center;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
     &__title {
         margin-bottom: 20px;
     }

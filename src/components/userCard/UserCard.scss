@@ -1,6 +1,7 @@
 .user-biographi {
     display: flex;
     padding: 30px 0;
+
     @media (max-width: 500px) {
         flex-direction: column;
         justify-content: center;
